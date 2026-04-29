@@ -1,0 +1,143 @@
+
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background: #ffffff;
+  color: #111;
+  margin: 0;
+  padding: 10px;
+}
+
+/* ⬇️ ВАЖНО: теперь вертикально */
+.boards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 5px;
+}
+
+.board-container {
+  border: 2px solid #333;
+  border-radius: 12px;
+  padding: 5px;
+  margin: 5px;
+  background: #f9fafb; /* лёгкий серый */
+  width: fit-content;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.board-container h4 {
+  margin: 2px 0;
+  font-size: 13px;
+  line-height: 1.1;
+}
+
+/* ⬇️ уменьшаем клетки */
+.board {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  /* grid-template-columns: repeat(6, 32px); */
+  gap: 4px;
+}
+
+.board.locked {
+  opacity: 0.6;
+  pointer-events: none; /* 🔒 блокирует клики */
+  transition: 0.2s;     /* прозрачность будет меняться плавно (0,2 сек), а не рывком */
+}
+.board-container.locked {
+  background: rgba(255, 0, 0, 0.2); /* лёгкий розовый */
+}
+.board-container.locked::after {
+  content: "🤖 Ход бота...";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  background: rgba(255,255,255,0.6);
+  border-radius: 12px;
+}
+.board-container {
+  position: relative;
+}
+
+
+/* ⬇️ уменьшенный размер */
+.cell {
+  width: 32px;
+  height: 32px;
+  background: #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 6px;
+}
+
+/* мобильная адаптация */
+@media (max-width: 400px) {
+  .board {
+    grid-template-columns: repeat(6, 28px);
+  }
+
+  .cell {
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+  }
+}
+
+.cell:hover {
+  background: #334155;
+}
+
+/*
+.hit { background: red; }
+.miss { background: gray; }
+.ship { background: green; }
+.near { background: #fca5a5; /* светло-красный  }
+.sunk { background: #7f1d1d; /* тёмно-красный  }
+.last { box-shadow: 0 0 10px 3px yellow; }
+*/
+
+/* Цвета состояний (под светлую тему) */
+.cell.ship { background: #60a5fa; }   /* синий */
+.cell.hit { background: #ef4444; }    /* красный */
+.cell.sunk { background: #b91c1c; }   /* тёмно-красный */
+.cell.miss { background: #b7b9db; }   /* тёмно-серый */         /* csscolor.ru !!!!!!!!!!!!!!! */
+.cell.near { background: #b7b9db; }   /* такой же */
+/* .cell.near { background: #fde68a; }    жёлтый */
+.cell.last { outline: 3px solid #f97316; } /* последний выстрел */
+
+@keyframes hitFlash {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+.flash {
+  animation: hitFlash 0.3s ease;
+}
+
+.win {
+  color: #22c55e;
+  font-weight: bold;
+  animation: pulse 0.6s ease 3;
+}
+
+.lose {
+  color: #ef4444;
+  font-weight: bold;
+  animation: pulse 0.6s ease 3;
+}
+
+@keyframes pulse {
+  0%   { transform: scale(1); opacity: 1; }
+  50%  { transform: scale(1.3); opacity: 0.6; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
