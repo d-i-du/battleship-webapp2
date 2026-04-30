@@ -42,19 +42,22 @@ body {
 }
 
 .board.locked {
-  opacity: 0.6;
+  opacity: 0.8;
   pointer-events: none; /* 🔒 блокирует клики */
-  transition: 0.2s;     /* прозрачность будет меняться плавно (0,2 сек), а не рывком */
+  transition: 0.3s;     /* прозрачность будет меняться плавно (0,2 сек), а не рывком */
 }
+
+/*
 .board-container.locked {
-  background: rgba(255, 0, 0, 0.2); /* лёгкий розовый */
-}
+  background: rgba(255, 0, 0, 0.2); /* лёгкий розовый
+} */
+
 .board-container.locked::after {
   content: "🤖 Ход бота...";
   position: absolute;
   inset: 0;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   font-weight: bold;
   background: rgba(255,255,255,0.6);
