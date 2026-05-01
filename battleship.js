@@ -439,8 +439,8 @@ function render() {
   }
 
   if (!gameOver) {
-    document.getElementById("status").innerText =
-      turn === "player" ? "🧭 Твой ход" : "🤖 Ход бота";
+    document.getElementById("status").innerText = ""
+//      turn === "player" ? "🧭 Твой ход" : "🤖 Ход бота";
   }
 
   const enemyContainer = document.querySelector("#enemyBoard").parentElement;
